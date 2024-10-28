@@ -1,7 +1,7 @@
 <template>
 
 <div>
-<h1>Front Page</h1>
+<h1 class="text-lg">Front Page</h1>
 </div>
 
 </template>

@@ -8,7 +8,7 @@ export default {
         black: 'rgb(var(--black))',
       },
       fontFamily: {
-
+        sans: ['sans-serif', 'Helvetica, Arial', 'system-ui']
       },
       fontSize: {
         // Smaller text (UI elements, captions)
