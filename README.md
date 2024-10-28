@@ -18,8 +18,17 @@ devDependencies:
 - [Eslint](https://eslint.vuejs.org/) eslint + prettier + typescript support
 - [Stylelint](https://stylelint.io/) for CSS linter 
 
+Extra 
+just to make shure noone commits 💩 to git 
+- [lint-staged](https://github.com/lint-staged/lint-staged) lint staged git files
+- [Husky](https://typicode.github.io/husky/) lint code on git commit
+
 ## Quick Start
 1. creat a new project
+if not installed 
+```
+npm install -g degit
+ ```
 ```
 npx degit kristianDKAndersen/vite-vue-typescript-starter.git your-project-name
  ```
@@ -40,4 +49,15 @@ npm update --save
 last but not least run 
 ```
 npm run dev
+```
+
+and remember to create a repo to push to!
+```
+cd your-project-name
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin <your-github-repo-url>
+git branch -M main
+git push -u origin main
 ```
