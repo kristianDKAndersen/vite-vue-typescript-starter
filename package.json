@@ -8,14 +8,9 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint:style": "stylelint \"**/*.{vue,css,scss}\" --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "clean": "rimraf dist",
-    "validate": "npm-run-all format --parallel typecheck lint format:check lint:style",
-    "fix": "npm-run-all format lint:fix lint:style",
+    "lint": "eslint  --fix",
+    "lint:style": "stylelint \"**/*.{css,vue}\" --fix",
+    "format": "prettier .  --write",
     "prepare": "husky install"
   },
   "dependencies": {
