@@ -1,80 +1,69 @@
-import js from '@eslint/js'
-import typescript from '@typescript-eslint/eslint-plugin'
-import typescriptParser from '@typescript-eslint/parser'
-import prettier from 'eslint-config-prettier'
-import vue from 'eslint-plugin-vue'
-import tailwind from 'eslint-plugin-tailwindcss'
-
-const isDevelopment = process.env.NODE_ENV !== 'production'
+import js from '@eslint/js';
+import * as parser from '@typescript-eslint/parser';
+import * as eslintTs from '@typescript-eslint/eslint-plugin';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import pluginVue from 'eslint-plugin-vue';
 
 export default [
   js.configs.recommended,
+  ...pluginVue.configs['flat/recommended'],
+
   {
-    files: ['**/*.{js,mjs,cjs,ts,tsx,vue}'],
+    files: ['*.vue', '**/*.vue'],
     languageOptions: {
-      parser: typescriptParser,
+      parser: pluginVue.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: {
-          jsx: true
-        }
+          jsx: false,
+        },
+        parser: {
+          js: 'espree',
+          ts: parser.default,
+          '<template>': 'espree',
+        },
+        extraFileExtensions: ['.vue'],
       },
-      globals: {
-        process: 'readonly'  // Add process to globals
-      }
     },
     plugins: {
-      '@typescript-eslint': typescript,
-      'vue': vue,
-      'tailwindcss': tailwind
+      vue: pluginVue,
+      '@typescript-eslint': eslintTs,
+    },
+    ...pluginVue.configs['flat/vue3-recommended'],
+    rules: {
+      'vue/multi-word-component-names': 'warn',
+      'vue/no-unused-components': 'warn',
+      'vue/no-unused-vars': 'warn',
+      'vue/object-curly-spacing': [2, 'always'],
+      'vue/html-closing-bracket-spacing': [
+        2,
+        {
+          selfClosingTag: 'always',
+        },
+      ],
+      ...eslintTs.configs.recommended.rules,
+    },
+  },
+  {
+    files: ['**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'],
+    ignores: ['dist/**', 'node_modules/**'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: parser.default,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': eslintTs,
     },
     rules: {
-      // TypeScript specific rules
       '@typescript-eslint/explicit-function-return-type': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': ['error', { 
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_'
-      }],
-      
-      // Vue specific rules
-      'vue/html-self-closing': ['error', {
-        html: {
-          void: 'always',
-          normal: 'always',
-          component: 'always'
-        }
-      }],
-      'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-      'vue/multi-word-component-names': 'error',
-      'vue/no-unused-components': 'error',
-      'vue/no-v-html': 'warn',
-      
-      // Tailwind specific rules
-      'tailwindcss/classnames-order': 'warn',
-      'tailwindcss/enforces-negative-arbitrary-values': 'warn',
-      'tailwindcss/enforces-shorthand': 'warn',
-      'tailwindcss/no-custom-classname': 'warn',
-      
-      // General rules
-      'no-console': isDevelopment ? 'off' : 'warn',
-      'no-debugger': isDevelopment ? 'off' : 'warn',
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'never']
-    }
+      ...eslintTs.configs.recommended.rules,
+    },
   },
-  // Vue SFC specific configuration
-  {
-    files: ['**/*.vue'],
-    rules: {
-      'vue/component-tags-order': ['error', {
-        order: ['script', 'template', 'style']
-      }],
-      'vue/block-order': ['error', {
-        order: ['script', 'template', 'style']
-      }]
-    }
-  },
-  prettier // Must be last to override other formatting rules
-]
+  eslintConfigPrettier,
+];

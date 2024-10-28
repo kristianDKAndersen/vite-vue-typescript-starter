@@ -1,28 +1,26 @@
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router';
 
-export default {
-  
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'App',
-  components: {
-    
-  }, 
-  setup() {
-  return {
-    
-  }
-  }
-  
-}
 
+  setup() {
+    const bunm = 'bunm';
+
+    return {
+      bunm,
+      RouterView,
+    };
+  },
+});
 </script>
 
 <template>
-  <main class="flex flex-col   items-center sm:px-2  mx-auto h-full ">
+  <main class="mx-auto flex h-full flex-col items-center">
     <RouterView />
   </main>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
