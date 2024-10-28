@@ -8,9 +8,11 @@ export default defineComponent({
 
   setup() {
     const bunm = 'bunm';
+    const chone = 'chone';
 
     return {
       bunm,
+      chone,
       RouterView,
     };
   },
