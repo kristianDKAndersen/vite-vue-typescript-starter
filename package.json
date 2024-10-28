@@ -13,10 +13,10 @@
     "lint:style": "stylelint \"**/*.{vue,css,scss}\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky install",
     "clean": "rimraf dist",
     "validate": "npm-run-all format --parallel typecheck lint format:check lint:style",
-    "fix": "npm-run-all format lint:fix lint:style"
+    "fix": "npm-run-all format lint:fix lint:style",
+    "prepare": "husky install"
   },
   "dependencies": {
     "pinia": "^2.2.4",
