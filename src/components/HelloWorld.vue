@@ -4,6 +4,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   setup() {
     const badabing: string = 'badabing';
+
     return {
       badabing,
     };

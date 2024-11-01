@@ -10,5 +10,8 @@
     "*.{css,scss,vue}": [
       "stylelint --fix",
       "prettier --write"
+    ],
+    "*.{md,markdown}": [
+      "prettier --write"
     ]
   }
